@@ -81,6 +81,10 @@ syntax match   javaScriptSpecial          "\\\d\d\d\|\\."
 syntax region  javaScriptString	          start=+"+  skip=+\\\\\|\\"+  end=+"\|$+	contains=javaScriptSpecial,@htmlPreproc
 syntax region  javaScriptString	          start=+'+  skip=+\\\\\|\\'+  end=+'\|$+	contains=javaScriptSpecial,@htmlPreproc
 
+" == CHANGES ==
+syntax match   javaScriptAttribute        "\.\zs[a-zA-Z][a-zA-Z0-9_]*\ze"
+syntax match   javaScriptMethod        "\.\zs[a-zA-Z][a-zA-Z0-9_]*\ze\s*("
+
 syntax match   javaScriptSpecialCharacter "'\\.'"
 syntax match   javaScriptNumber           "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 syntax region  javaScriptRegexpString     start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gim]\{0,2\}\s*$+ end=+/[gim]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@htmlPreproc oneline
@@ -100,7 +104,7 @@ syntax keyword javaScriptAjaxMethods              onreadystatechange abort getAl
 syntax keyword javaScriptPropietaryObjects        ActiveXObject
 syntax keyword javaScriptPropietaryMethods        attachEvent detachEvent cancelBubble returnValue
 
-syntax keyword javaScriptHtmlElemProperties       className  clientHeight  clientLeft  clientTop  clientWidth  dir  href  id  innerHTML  lang  length  offsetHeight  offsetLeft  offsetParent  offsetTop  offsetWidth  scrollHeight  scrollLeft  scrollTop  scrollWidth  style  tabIndex  target  title
+"syntax keyword javaScriptHtmlElemProperties       className  clientHeight  clientLeft  clientTop  clientWidth  dir  href  id  innerHTML  lang  length  offsetHeight  offsetLeft  offsetParent  offsetTop  offsetWidth  scrollHeight  scrollLeft  scrollTop  scrollWidth  style  tabIndex  target  title
 
 syntax keyword javaScriptEventListenerKeywords    blur click focus mouseover mouseout load item
 
@@ -159,7 +163,7 @@ syntax keyword javaScriptEventListenerMethods     scrollIntoView  addEventListen
 	endif
 " end DOM/HTML/CSS specified things }}}
 " Code blocks"{{{
-syntax cluster javaScriptAll       contains=javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptString,javaScriptRegexpString,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptWebAPI,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFuncKeyword,javaScriptConditional,javaScriptGlobal,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptMessage,javaScriptIdentifier,javaScriptExceptions,javaScriptReserved,javaScriptDeprecated,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation,javaScriptBrowserObjects,javaScriptDOMObjects,javaScriptAjaxObjects,javaScriptPropietaryObjects,javaScriptDOMMethods,javaScriptHtmlElemProperties,javaScriptDOMProperties,javaScriptEventListenerKeywords,javaScriptEventListenerMethods,javaScriptAjaxProperties,javaScriptAjaxMethods,javaScriptFuncArg
+syntax cluster javaScriptAll       contains=javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptString,javaScriptRegexpString,javaScriptMethod,javaScriptAttribute,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptWebAPI,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFuncKeyword,javaScriptConditional,javaScriptGlobal,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptMessage,javaScriptIdentifier,javaScriptExceptions,javaScriptReserved,javaScriptDeprecated,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation,javaScriptBrowserObjects,javaScriptDOMObjects,javaScriptAjaxObjects,javaScriptPropietaryObjects,javaScriptDOMMethods,javaScriptDOMProperties,javaScriptEventListenerKeywords,javaScriptEventListenerMethods,javaScriptAjaxProperties,javaScriptAjaxMethods,javaScriptFuncArg
 
 if main_syntax == "javascript"
 	syntax sync clear
@@ -221,6 +225,8 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptRegexpString           String
 
 	HiLink javaScriptNumber                 Number
+	HiLink javaScriptAttribute              JavascriptAttribute
+	HiLink javaScriptMethod                 JavascriptMethod
 	HiLink javaScriptFloat                  Number
 
 	HiLink javaScriptGlobal                 Constant
@@ -271,15 +277,15 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptAjaxMethods            Type
 	HiLink javaScriptAjaxProperties         Label
 
-	HiLink javaScriptFuncKeyword            Function
+	HiLink javaScriptFuncKeyword            Title
 	HiLink javaScriptFuncDef                PreProc
-	HiLink javaScriptFuncExp                Title
+	HiLink javaScriptFuncExp                JavascriptMethod 
 	HiLink javaScriptFuncArg               	Special
 	HiLink javaScriptFuncComma              Operator
 	HiLink javaScriptFuncEq                 Operator
 
 	HiLink javaScriptHtmlEvents             Constant
-	HiLink javaScriptHtmlElemProperties     Label
+	"HiLink javaScriptHtmlElemProperties     Label
 
 	HiLink javaScriptEventListenerKeywords  Type
 
