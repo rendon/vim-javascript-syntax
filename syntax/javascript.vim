@@ -84,6 +84,7 @@ syntax region  javaScriptString	          start=+'+  skip=+\\\\\|\\'+  end=+'\|$
 " == CHANGES ==
 syntax match   javaScriptAttribute        "\.\zs[a-zA-Z][a-zA-Z0-9_]*\ze"
 syntax match   javaScriptMethod        "\.\zs[a-zA-Z][a-zA-Z0-9_]*\ze\s*("
+syntax match   javaScriptObjectKey     "\zs[a-zA-Z_]\+:\ze"
 
 syntax match   javaScriptSpecialCharacter "'\\.'"
 syntax match   javaScriptNumber           "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
@@ -163,7 +164,7 @@ syntax keyword javaScriptEventListenerMethods     scrollIntoView  addEventListen
 	endif
 " end DOM/HTML/CSS specified things }}}
 " Code blocks"{{{
-syntax cluster javaScriptAll       contains=javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptString,javaScriptRegexpString,javaScriptMethod,javaScriptAttribute,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptWebAPI,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFuncKeyword,javaScriptConditional,javaScriptGlobal,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptMessage,javaScriptIdentifier,javaScriptExceptions,javaScriptReserved,javaScriptDeprecated,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation,javaScriptBrowserObjects,javaScriptDOMObjects,javaScriptAjaxObjects,javaScriptPropietaryObjects,javaScriptDOMMethods,javaScriptDOMProperties,javaScriptEventListenerKeywords,javaScriptEventListenerMethods,javaScriptAjaxProperties,javaScriptAjaxMethods,javaScriptFuncArg
+syntax cluster javaScriptAll       contains=javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptString,javaScriptRegexpString,javaScriptMethod,javaScriptAttribute,javaScriptObjectKey,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptWebAPI,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFuncKeyword,javaScriptConditional,javaScriptGlobal,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptMessage,javaScriptIdentifier,javaScriptExceptions,javaScriptReserved,javaScriptDeprecated,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation,javaScriptBrowserObjects,javaScriptDOMObjects,javaScriptAjaxObjects,javaScriptPropietaryObjects,javaScriptDOMMethods,javaScriptDOMProperties,javaScriptEventListenerKeywords,javaScriptEventListenerMethods,javaScriptAjaxProperties,javaScriptAjaxMethods,javaScriptFuncArg
 
 if main_syntax == "javascript"
 	syntax sync clear
@@ -206,11 +207,11 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	else
 		command -nargs=+ HiLink hi def link <args>
 	endif
-	HiLink javaScriptEndColons              Operator
+	"HiLink javaScriptEndColons              Operator
 	HiLink javaScriptOpSymbols              Operator
 	HiLink javaScriptLogicSymbols           Boolean
-	HiLink javaScriptBraces                 Function
-	HiLink javaScriptParens                 Operator
+	"HiLink javaScriptBraces                 Function
+	"HiLink javaScriptParens                 Operator
 
 	HiLink javaScriptComment                Comment
 	HiLink javaScriptLineComment            Comment
@@ -227,6 +228,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptNumber                 Number
 	HiLink javaScriptAttribute              JavascriptAttribute
 	HiLink javaScriptMethod                 JavascriptMethod
+	HiLink javaScriptObjectKey              JavascriptAttribute
 	HiLink javaScriptFloat                  Number
 
 	HiLink javaScriptGlobal                 Constant
@@ -234,11 +236,11 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptPrototype              Type
 	HiLink javaScriptConditional            Conditional
 	HiLink javaScriptBranch                 Conditional
-	HiLink javaScriptIdentifier             Identifier
+	HiLink javaScriptIdentifier             Statement
 	HiLink javaScriptRepeat                 Repeat
 	HiLink javaScriptStatement              Statement
 	HiLink javaScriptMessage                Keyword
-	HiLink javaScriptReserved               Keyword
+	HiLink javaScriptReserved               Type
 	HiLink javaScriptOperator               Operator
 	HiLink javaScriptNull                   Type
 	HiLink javaScriptBoolean                Boolean
@@ -277,11 +279,11 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptAjaxMethods            Type
 	HiLink javaScriptAjaxProperties         Label
 
-	HiLink javaScriptFuncKeyword            Title
-	HiLink javaScriptFuncDef                PreProc
-	HiLink javaScriptFuncExp                JavascriptMethod 
-	HiLink javaScriptFuncArg               	Special
-	HiLink javaScriptFuncComma              Operator
+	HiLink javaScriptFuncKeyword            Statement
+	"HiLink javaScriptFuncDef                PreProc
+    "HiLink javaScriptFuncExp               JavascriptMethod
+    "HiLink javaScriptFuncArg               Special
+    "HiLink javaScriptFuncComma             Operator
 	HiLink javaScriptFuncEq                 Operator
 
 	HiLink javaScriptHtmlEvents             Constant
